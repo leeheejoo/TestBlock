@@ -19,4 +19,6 @@ class transaction {
     }
 }
 
-module.exports = new transaction();
+module.exports = {
+    transaction : transaction
+}

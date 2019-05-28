@@ -8,4 +8,6 @@ class pow {
 
 }
 
-module.exports = new pow();
+module.exports = {
+    pow : pow
+}

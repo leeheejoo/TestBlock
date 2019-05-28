@@ -1,5 +1,5 @@
-const account = require('./account');
-const transactions = require('./transaction');
+const account = require('./account').account;
+const transactions = require('./transaction').transaction;
 
 class block {
 

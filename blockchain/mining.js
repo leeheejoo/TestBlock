@@ -6,4 +6,6 @@ class mining {
 
 }
 
-module.exports = new mining();
+module.exports = {
+    mining : mining
+}
