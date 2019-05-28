@@ -1,7 +1,43 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/', async function(req, res, next) {
+router.post('/', function(req, res, next) {
+
+	res.rpc('getCoinbaseAddress', function(params, respond){
+
+		try{
+			let address = chain.getCoinbaseAddress();
+			respond(
+				{
+					result:  {
+						address: address
+					}
+				}
+			);
+    	}
+		catch(e){
+			respond(e);
+		}
+
+    });
+    
+    res.rpc('setCoinbaseAddress', function(params, respond){
+
+		try{
+			let address = params.address;
+			chain.setCoinbaseAddress(address);
+
+			respond(
+				{
+					result: 'success'
+				}
+			);
+    	}
+		catch(e){
+			respond({error:e});
+		}
+
+	});
 
 	res.rpc('getNewAddress', function(params, respond){
 
@@ -21,7 +57,7 @@ router.post('/', async function(req, res, next) {
 
 	});
 
-	res.rpc('getBalance', async function(params, respond){
+	res.rpc('getBalance', function(params, respond){
 
 		try{
 			let address = params.address;
@@ -35,22 +71,108 @@ router.post('/', async function(req, res, next) {
 					}
 				}
 			);
-    }
+    	}
+		catch(e){
+			respond({error:e});
+		}
+
+    });
+    
+    res.rpc('getAccounts', function(params, respond){
+
+		try{
+            let accounts = chain.getAccounts();
+            
+			respond(
+				{
+					result:  {
+						accounts: accounts
+					}
+				}
+			);
+    	}
 		catch(e){
 			respond({error:e});
 		}
 
 	});
+
+	res.rpc('transfer', function(params, respond){
+		try{
+            let from = params.from;
+            let to = params.to;
+            let value = Number(params.value);
+            let ret = chain.transfer(from,to,value);
+            
+            	
+            // transaction sign 기능을 구현하지 않아 txid를 생성하지 않음
+            // 따라서 결과값을 txid(hash) 대신 success/fail로 대체
+
+			respond(
+				{
+					result: ret? 'success':'fail'
+				}
+			);
+    	}
+		catch(e){
+			respond({error:e});
+		}
+    });
+    
+    res.rpc('getBlock', function(params, respond){
+        try{
+            let hash = params.hash;
+            let block = chain.getBlock(hash);
+            
+			respond(
+				{
+					result:  {
+						block: block
+					}
+				}
+			);
+    	}
+		catch(e){
+			respond({error:e});
+		}
+      });
+      
+    res.rpc('getBlockHeight', function(params, respond){
+        try{
+            let height = chain.getBlockHeight();
+            
+			respond(
+				{
+					result:  {
+						height: height
+					}
+				}
+			);
+    	}
+		catch(e){
+			respond({error:e});
+		}
+  	});
 	
-	res.rpc('transfer', async function(params, respond){
-		respond({result: 'success'});
-	});
 	
-	res.rpc('generateBlock', async function(params, respond){
-		respond({result: 'success'});
-  });
+	res.rpc('generateBlock', function(params, respond){
+        try{
+            let hash = chain.generateBlock();
+            
+			respond(
+				{
+					result:  {
+						hash: hash
+					}
+				}
+			);
+    	}
+		catch(e){
+			respond({error:e});
+		}
+  	});
 	
-	res.rpc('verifyBlock', async function(params, respond){
+	res.rpc('verifyBlock',  function(params, respond){
 		respond({result: 'success'});
 	});
 	

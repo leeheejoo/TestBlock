@@ -1,4 +1,3 @@
-const account = require('./account').account;
 const transactions = require('./transaction').transaction;
 
 class block {
@@ -8,27 +7,59 @@ class block {
         this.prevHash = '';
         this.nonce = 0;
         this.transactions = [];
-        this.accounts = [];
-        this.timeStamp = new Date().getTime();
+        this.timeStamp = 0;
+    }
+
+    setHash(hash) {
+        this.hash = hash;
+    }
+
+    getHash() {
+        return this.hash;
+    }
+
+    setPrevHash(hash) {
+        this.prevHash = hash;
+    }
+
+    getPrevHash() {
+        return this.prevHash;
+    }
+
+    setNonce(nonce) {
+        this.nonce = nonce;
+    }
+
+    getNonce() {
+        return this.nonce;
     }
 
     addTransaction(transaction) {
         this.transactions.push(transaction);
     }
 
-    addAccount(account) {
-        this.accounts.push(account);
+    addTransactions(transactions) {
+        this.transactions = this.transactions.concat(transactions);
+    }
+
+    getTransactions() {
+        return this.transactions;
+    }
+
+    setTimeStamp(timeStamp) {
+        this.timeStamp  = timeStamp;
+    }
+
+    getTimeStamp() {
+        return this.timeStamp;
     }
 
     getContent() {
+
         let contents = this.prevHash + this.nonce.toString();
 
         this.transactions.forEach(tx => {
             contents += tx.toString();
-        });
-
-        this.accounts.forEach(acc => {
-            contents += acc.getAddress();
         });
 
         contents += this.timeStamp;

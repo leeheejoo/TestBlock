@@ -1,35 +1,63 @@
 const account = require('./account').account;
 const block = require('./block').block;
+const transaction = require('./transaction').transaction;
 
 class storage {
 
     constructor() {
-        this.blocks = new Map();
-        this.acconts = new Map();
+        this.blocks = [];
+        this.blockCache = new Map();
+        this.accounts = new Map();
+        this.txPool = [];
     }
 
-    saveBlock(block) {
-        this.blocks[block.hash] = block;
+    addBlock(block) {
+        this.blocks.push(block);
+        this.blockCache.set(block.hash,block);
     }
 
     getBlock(hash) {
-        return blocks[hash];
+        
+        if(this.blockCache.has(hash))
+            return this.blockCache.get(hash);
+
+        throw new Error('No block information.');
+    }
+
+    getBlockHeight() {
+        return this.blocks.length;
     }
 
     addAccount(account) {
-        this.acconts[account.address] = account;
+        this.accounts.set(account.address,account);
+    }
+
+    getAccounts() {
+        return Array.from(this.accounts.values());
     }
 
     saveBalance(address, balance) {
-        this.acconts[address] += balance;
+        this.accounts[address] += balance;
     }
 
     getBalance(address){
 
-        if(this.acconts[address])
-            return this.acconts[address].getBalance();
+        if(this.accounts[address])
+            return this.accounts[address].getBalance();
 
         throw new Error('No account information.');
+    }
+
+    addTransaction(transaction){
+        this.txPool.push(transaction);
+    }
+
+    getTransactions() {
+        return this.txPool;
+    }
+
+    clearTxPool(){
+        this.txPool = [];
     }
 }
 

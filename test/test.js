@@ -5,14 +5,19 @@ let utils = require("../blockchain/utils");
 
 describe('test', function() {
 
+    before(function () {
+
+    });
+
 	describe('account test', function() {
 
 		it('getNewAddress', function() {
             
             let acc1 = new account();
-            let addresss = acc1.getNewAddress();
+            let address = acc1.getNewAddress();
 
-            //console.log(addresss);
+            assert(address != undefined);
+            //console.log(address);
         });
         
 	});
@@ -24,6 +29,7 @@ describe('test', function() {
             let block1 = new block();
             let content = block1.getContent();
 
+            assert(content != undefined);
             //console.log(content);
         });
         
@@ -57,5 +63,9 @@ describe('test', function() {
             assert.equal(hash,'9a984e219b07f9b645ef35f4de938b4741abe2e0b4adc88b40e9367170c91cc8');
         });
         
-	});
+    });
+    
+    after(function () {
+  
+    });
 });

@@ -1,18 +1,21 @@
+
+// transaction hash 및 sign 기능은 구현하지 않음.
+
 class transaction {
 
     constructor(from, to, value) {
-        this.form = from;
+        this.from = from;
         this.to = to;
         this.value = value;
     }
 
     toString() {
-        return form+to+value;
+        return this.from+this.to+this.value;
     }
 
     toJson() {
         return {
-            from : this.form,
+            from : this.from,
             to : this.to,
             value : this.value
         }
