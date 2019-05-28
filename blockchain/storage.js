@@ -24,6 +24,13 @@ class storage {
         throw new Error('No block information.');
     }
 
+    getCurrentBlock(){
+        if(this.blocks.length > 0)
+            return this.blocks[this.blocks.length-1];
+
+        throw new Error('No block information.');
+    }
+
     getBlockHeight() {
         return this.blocks.length;
     }
@@ -42,8 +49,16 @@ class storage {
 
     getBalance(address){
 
-        if(this.accounts[address])
-            return this.accounts[address].getBalance();
+        if(this.accounts.has(address))
+            return this.accounts.get(address).getBalance();
+
+        throw new Error('No account information.');
+    }
+
+    setBalance(address,balance){
+
+        if(this.accounts.has(address))
+            return this.accounts.get(address).setBalance(balance);
 
         throw new Error('No account information.');
     }

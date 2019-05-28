@@ -9,6 +9,18 @@ class transaction {
         this.value = value;
     }
 
+    getFrom(){
+        return this.from;
+    }
+
+    getTo(){
+        return this.to;
+    }
+
+    getValue(){
+        return this.value;
+    }
+
     toString() {
         return this.from+this.to+this.value;
     }

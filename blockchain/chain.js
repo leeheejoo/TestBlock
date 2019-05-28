@@ -38,9 +38,19 @@ class chain {
     }
 
     transfer(from, to, value){
-        let tx = new transaction(from,to,value);
-        this.storage.addTransaction(tx);
-        return true;
+
+        try{
+      
+            if(this.getBalance(from) >= value){
+                let tx = new transaction(from,to,value);
+                this.storage.addTransaction(tx);
+                return true;
+            }
+        }
+        catch(e){
+            throw new Error('There is not enough balance.');
+        }
+
     }
 
     getBlock(hash){
@@ -54,14 +64,7 @@ class chain {
     generateBlock(){
         
         let mg = new mining(this.coinbase,this.storage);
-
-        // genesys block 생성
-        if(this.getBlockHeight() == 0){
-            return mg.generateGenesysBlock();
-        }
-        else{
-            return mg.generateBlock();
-        }
+        return mg.generateBlock();
     }
 }
 

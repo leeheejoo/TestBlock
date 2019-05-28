@@ -99,11 +99,21 @@ router.post('/', function(req, res, next) {
 
 	res.rpc('transfer', function(params, respond){
 		try{
+
             let from = params.from;
             let to = params.to;
             let value = Number(params.value);
+
+            if(from == undefined || from == '')
+                throw new Error('There is no information from.');
+
+            if(to == undefined || to == '')
+                throw new Error('There is no information to.');
+
+            if(value <= 0)
+                throw new Error('Balances less than 0 can not be transferred.');
+
             let ret = chain.transfer(from,to,value);
-            
             	
             // transaction sign 기능을 구현하지 않아 txid를 생성하지 않음
             // 따라서 결과값을 txid(hash) 대신 success/fail로 대체
