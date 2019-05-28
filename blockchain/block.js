@@ -1,5 +1,5 @@
-const account = require('account');
-const transactions = require('transactions');
+const account = require('./account');
+const transactions = require('./transaction');
 
 class block {
 
@@ -9,7 +9,7 @@ class block {
         this.nonce = 0;
         this.transactions = [];
         this.accounts = [];
-        this.timeStamp = Date().getTime();
+        this.timeStamp = new Date().getTime();
     }
 
     addTransaction(transaction) {
@@ -21,14 +21,14 @@ class block {
     }
 
     getContent() {
-        let contents = this.prevHash + nonce.toString();
+        let contents = this.prevHash + this.nonce.toString();
 
         this.transactions.forEach(tx => {
             contents += tx.toString();
         });
 
         this.accounts.forEach(acc => {
-            contents += acc.toString();
+            contents += acc.getAddress();
         });
 
         contents += this.timeStamp;
@@ -37,4 +37,6 @@ class block {
     }
 }
 
-module.exports = new block();
+module.exports = {
+    block : block
+}
