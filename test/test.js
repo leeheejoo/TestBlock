@@ -36,7 +36,7 @@ describe('test', function() {
             let data = 'testtest';
             let hash = utils.sha256(data);
 
-            console.log(hash);
+            assert.equal(hash,'37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578');
         });
 
         
@@ -45,7 +45,7 @@ describe('test', function() {
             let data = 'testtest';
             let hash = utils.hash160(data);
 
-            console.log(hash);
+            assert.equal(hash,'8200bd0425cc70c7d698df3fe412044eaab83f94');
         });
 
         
@@ -54,7 +54,7 @@ describe('test', function() {
             let data = 'testtest';
             let hash = utils.hash256(data);
 
-            console.log(hash);
+            assert.equal(hash,'9a984e219b07f9b645ef35f4de938b4741abe2e0b4adc88b40e9367170c91cc8');
         });
         
 	});
