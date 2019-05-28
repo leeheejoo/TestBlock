@@ -18,6 +18,9 @@ class account {
 
         this.address = btcAddress.address;
 
+        // test를 위해 주소 생성시 100 coin 부여
+        this.balance = 100;
+
         return this.address;
     }
 
@@ -25,8 +28,12 @@ class account {
         return this.address;
     }
 
-    getBalace() {
+    getBalance() {
         return this.balance;
+    }
+
+    setBalance(balance) {
+        this.balance = balance;
     }
 }
 

@@ -23,6 +23,14 @@ class storage {
     saveBalance(address, balance) {
         this.acconts[address] += balance;
     }
+
+    getBalance(address){
+
+        if(this.acconts[address])
+            return this.acconts[address].getBalance();
+
+        throw new Error('No account information.');
+    }
 }
 
 module.exports = {

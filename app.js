@@ -29,4 +29,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// chain을 전역으로 생성
+chain = require('./blockchain/chain');
+
 module.exports = app;
