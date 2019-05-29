@@ -31,6 +31,10 @@ class account {
     setBalance(balance) {
         this.balance = balance;
     }
+
+    appendBalance(balance) {
+        this.balance += balance;
+    }
 }
 
 module.exports = {

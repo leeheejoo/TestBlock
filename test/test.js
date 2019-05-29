@@ -2,6 +2,7 @@ let assert = require("assert");
 let account = require("../blockchain/account").account;
 let block = require("../blockchain/block").block;
 let utils = require("../blockchain/utils");
+let chain = require("../blockchain/chain");
 
 describe('test', function() {
 
@@ -61,6 +62,23 @@ describe('test', function() {
             let hash = utils.hash256(data);
 
             assert.equal(hash,'9a984e219b07f9b645ef35f4de938b4741abe2e0b4adc88b40e9367170c91cc8');
+        });
+        
+    });
+
+    describe('mining test', function() {
+
+		it('mining test', function() {
+            
+            chain.generateBlock();
+            let blockHeight = chain.getBlockHeight();
+            chain.generateBlock();
+            blockHeight = chain.getBlockHeight();
+            chain.generateBlock();
+            blockHeight = chain.getBlockHeight();
+
+            assert(blockHeight == 3);
+            //console.log(content);
         });
         
     });

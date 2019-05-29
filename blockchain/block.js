@@ -34,6 +34,10 @@ class block {
         return this.nonce;
     }
 
+    increaseNonce() {
+        this.nonce++;
+    }
+
     addTransaction(transaction) {
         this.transactions.push(transaction);
     }

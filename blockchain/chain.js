@@ -1,7 +1,7 @@
 const storage = require('./storage').storage;
 const account = require('./account').account;
 const transaction = require('./transaction').transaction;
-const mining = require('./mining').mining;
+const miner = require('./miner').miner;
 
 class chain {
 
@@ -63,8 +63,8 @@ class chain {
 
     generateBlock(){
         
-        let mg = new mining(this.coinbase,this.storage);
-        return mg.generateBlock();
+        let mining = new miner(this.coinbase,this.storage);
+        return mining.generateBlock();
     }
 }
 

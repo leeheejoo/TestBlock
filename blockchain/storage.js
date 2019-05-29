@@ -63,6 +63,14 @@ class storage {
         throw new Error('No account information.');
     }
 
+    appendBalance(address,balance){
+
+        if(this.accounts.has(address))
+            return this.accounts.get(address).appendBalance(balance);
+
+        throw new Error('No account information.');
+    }
+
     addTransaction(transaction){
         this.txPool.push(transaction);
     }
