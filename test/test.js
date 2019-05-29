@@ -82,7 +82,18 @@ describe('test', function() {
         });
         
     });
-    
+
+    describe('chain test', function() {
+
+		it('verify test', function() {
+            
+            let verify = chain.verifyChain();
+
+            assert(verify.result == "success");
+        });
+        
+    });
+        
     after(function () {
   
     });

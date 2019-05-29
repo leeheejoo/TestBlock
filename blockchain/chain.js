@@ -2,6 +2,7 @@ const storage = require('./storage').storage;
 const account = require('./account').account;
 const transaction = require('./transaction').transaction;
 const miner = require('./miner').miner;
+const consensus = require('./consensus').consensus;
 
 class chain {
 
@@ -68,6 +69,11 @@ class chain {
       
     let mining = new miner(this.coinbase,this.storage);
     return mining.generateBlock();
+  }
+
+  verifyChain(){
+    let cs = new consensus();
+    return cs.verifyChain(this.storage);
   }
 }
 

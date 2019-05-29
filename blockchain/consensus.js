@@ -1,4 +1,5 @@
 const utils = require('./utils');
+const storage = require('./storage').storage;
 
 class consensus {
 
@@ -17,8 +18,41 @@ class consensus {
     return '';
   }
 
-  verifyBlock(){
+  verifyChain(storage){
 
+    let ret = {
+      result : "success",
+      details : []
+    }
+
+    let blocks = storage.getAllBlocks();
+    let prevHash = '';
+
+    for(let i=0; i < blocks.length; i++){
+
+      let block = blocks[i];
+
+      block.setPrevHash(prevHash);
+
+      let blockHash = block.getHash();
+      let blockContent = block.getContent();
+      let verifyHash = utils.sha256(blockContent);
+
+      ret.details.push({
+        height : i+1,
+        blockHash : blockHash,
+        verifyHash : verifyHash
+      })
+
+      if(blockHash != verifyHash){
+        ret.result = "fail";
+        break;
+      }
+
+      prevHash = verifyHash;
+    }
+
+    return ret;
   }
 }
 

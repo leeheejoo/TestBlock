@@ -32,6 +32,10 @@ class storage {
     throw new Error('No blocks information.');
   }
 
+  getAllBlocks() {
+    return this.blocks;
+  }
+
   getCurrentBlock(){
     if(this.blocks.length > 0)
       return this.blocks[this.blocks.length-1];

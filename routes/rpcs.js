@@ -210,8 +210,22 @@ router.post('/', function(req, res, next) {
     }
   });
 
-  res.rpc('verifyBlock',  function(params, respond){
-    respond({result: 'success'});
+  res.rpc('verifyChain',  function(params, respond){
+
+    try{
+    
+      let result = chain.verifyChain();
+
+      respond(
+        {
+          result: result
+        }
+      );
+    }
+    catch(e){
+      respond({error:e});
+    }
+
   });
 
 });
