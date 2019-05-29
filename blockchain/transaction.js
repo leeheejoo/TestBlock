@@ -3,37 +3,37 @@
 
 class transaction {
 
-    constructor(from, to, value) {
-        this.from = from;
-        this.to = to;
-        this.value = value;
-    }
+  constructor(from, to, value) {
+    this.from = from;
+    this.to = to;
+    this.value = value;
+  }
 
-    getFrom(){
-        return this.from;
-    }
+  getFrom(){
+    return this.from;
+  }
 
-    getTo(){
-        return this.to;
-    }
+  getTo(){
+    return this.to;
+  }
 
-    getValue(){
-        return this.value;
-    }
+  getValue(){
+    return this.value;
+  }
 
-    toString() {
-        return this.from+this.to+this.value;
-    }
+  toString() {
+    return this.from+this.to+this.value;
+  }
 
-    toJson() {
-        return {
-            from : this.from,
-            to : this.to,
-            value : this.value
-        }
+  toJson() {
+    return {
+      from : this.from,
+      to : this.to,
+      value : this.value
     }
+  }
 }
 
 module.exports = {
-    transaction : transaction
+  transaction : transaction
 }

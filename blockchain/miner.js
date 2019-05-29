@@ -16,6 +16,7 @@ class miner {
 
         let gBlock = new block();
 
+        //set prev block hash
         //genesys block          
         if(this.storage.getBlockHeight() == 0)
             gBlock.setPrevHash('');                     
@@ -67,6 +68,7 @@ class miner {
             }
         });
 
+        // clear tx pool
         this.storage.clearTxPool();
 
         console.log(`New block created by hashing ${gBlock.getNonce()} times.`);

@@ -2,85 +2,85 @@ const transactions = require('./transaction').transaction;
 
 class block {
 
-    constructor() {
-        this.hash = '';
-        this.prevHash = '';
-        this.nonce = 0;
-        this.difficultyBits = 0;
-        this.transactions = [];
-        this.timeStamp = 0;
-    }
+  constructor() {
+    this.hash = '';
+    this.prevHash = '';
+    this.nonce = 0;
+    this.difficultyBits = 0;
+    this.transactions = [];
+    this.timeStamp = 0;
+  }
 
-    setHash(hash) {
-        this.hash = hash;
-    }
+  setHash(hash) {
+    this.hash = hash;
+  }
 
-    getHash() {
-        return this.hash;
-    }
+  getHash() {
+    return this.hash;
+  }
 
-    setPrevHash(hash) {
-        this.prevHash = hash;
-    }
+  setPrevHash(hash) {
+    this.prevHash = hash;
+  }
 
-    getPrevHash() {
-        return this.prevHash;
-    }
+  getPrevHash() {
+    return this.prevHash;
+  }
 
-    setNonce(nonce) {
-        this.nonce = nonce;
-    }
+  setNonce(nonce) {
+    this.nonce = nonce;
+  }
 
-    getNonce() {
-        return this.nonce;
-    }
+  getNonce() {
+    return this.nonce;
+  }
 
-    increaseNonce() {
-        this.nonce++;
-    }
+  increaseNonce() {
+    this.nonce++;
+  }
 
-    getDifficultyBits() {
-        return this.difficultyBits;
-    }
+  getDifficultyBits() {
+    return this.difficultyBits;
+  }
 
-    setDifficultyBits(bits) {
-        this.difficultyBits = bits;
-    }
+  setDifficultyBits(bits) {
+    this.difficultyBits = bits;
+  }
 
-    addTransaction(transaction) {
-        this.transactions.push(transaction);
-    }
+  addTransaction(transaction) {
+    this.transactions.push(transaction);
+  }
 
-    addTransactions(transactions) {
-        this.transactions = this.transactions.concat(transactions);
-    }
+  addTransactions(transactions) {
+    this.transactions = this.transactions.concat(transactions);
+  }
 
-    getTransactions() {
-        return this.transactions;
-    }
+  getTransactions() {
+    return this.transactions;
+  }
 
-    setTimeStamp(timeStamp) {
-        this.timeStamp  = timeStamp;
-    }
+  setTimeStamp(timeStamp) {
+    this.timeStamp  = timeStamp;
+  }
 
-    getTimeStamp() {
-        return this.timeStamp;
-    }
+  getTimeStamp() {
+    return this.timeStamp;
+  }
 
-    getContent() {
+  getContent() {
 
-        let contents = this.prevHash + this.nonce.toString() + this.difficultyBits.toString();
+    let contents = this.prevHash + this.nonce.toString() + this.difficultyBits.toString();
 
-        this.transactions.forEach(tx => {
-            contents += tx.toString();
-        });
+    this.transactions.forEach(tx => {
+      contents += tx.toString();
+    });
 
-        contents += this.timeStamp;
+    contents += this.timeStamp;
 
-        return contents;
-    }
+    return contents;
+  }
 }
 
 module.exports = {
-    block : block
+  block : block
 }
