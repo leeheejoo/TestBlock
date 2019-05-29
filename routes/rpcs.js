@@ -145,7 +145,35 @@ router.post('/', function(req, res, next) {
 		catch(e){
 			respond({error:e});
 		}
-      });
+	});
+
+	// start는 1부터 시작
+	res.rpc('getBlocks', function(params, respond){
+        try{
+
+			let start = params.start;
+			let count = params.count;
+
+			if(start == undefined || start < 1)
+				throw new Error('Must be a start greater than 0.');
+
+			if(count == undefined || count < 1)
+				throw new Error('Must be a count greater than 0.');
+
+            let blocks = chain.getBlocks(start,count);
+            
+			respond(
+				{
+					result:  {
+						blocks: blocks
+					}
+				}
+			);
+    	}
+		catch(e){
+			respond({error:e});
+		}
+	});
       
     res.rpc('getBlockHeight', function(params, respond){
         try{

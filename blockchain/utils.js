@@ -7,11 +7,6 @@ function sha256(data) {
     return hash.toString('hex');
 }
 
-function sha256Raw(data) {
-    return bitcoin.crypto.sha256(Buffer.from(data));
-}
-
-
 // ripemd
 function hash160(data) {
     let hash = bitcoin.crypto.ripemd160(Buffer.from(data));
@@ -26,7 +21,6 @@ function hash256(data) {
 
 module.exports = {
     sha256 : sha256,
-    sha256Raw : sha256Raw,
     hash160 : hash160,
     hash256 : hash256,
 }

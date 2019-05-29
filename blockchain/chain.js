@@ -57,6 +57,10 @@ class chain {
         return this.storage.getBlock(hash);
     }
 
+    getBlocks(start, count){
+        return this.storage.getBlocks(start, count);
+    }
+
     getBlockHeight(){
         return this.storage.getBlockHeight();
     }

@@ -24,6 +24,14 @@ class storage {
         throw new Error('No block information.');
     }
 
+    getBlocks(start,count) {
+        
+        if(this.blocks.length > 0)
+            return this.blocks.slice(start-1,start+count-1);
+
+        throw new Error('No blocks information.');
+    }
+
     getCurrentBlock(){
         if(this.blocks.length > 0)
             return this.blocks[this.blocks.length-1];

@@ -1,4 +1,3 @@
-const config = require('../config/config');
 const utils = require('./utils');
 
 class consensus {
@@ -7,9 +6,9 @@ class consensus {
 
     }
 
-    pow(blockContent) {
+    pow(blockContent, difficultyBits) {
 
-        let target = Math.pow(2,256-config.difficultyBits);
+        let target = Math.pow(2,256-difficultyBits);
         let hash = utils.sha256(blockContent);
         let numHash = parseInt(hash, 16);
         if(target > numHash)

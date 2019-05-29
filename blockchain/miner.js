@@ -27,6 +27,8 @@ class miner {
         gBlock.addTransaction(coinbaseTx);
         //select tx
         gBlock.addTransactions(this.storage.getTransactions());
+        //set difficultyBits
+        gBlock.setDifficultyBits(config.difficultyBits);
 
         let hash = '';
 
@@ -38,7 +40,7 @@ class miner {
             gBlock.increaseNonce();
 
             let blockContent = gBlock.getContent();
-            hash = this.consensus.pow(blockContent);
+            hash = this.consensus.pow(blockContent,config.difficultyBits);
             
             if(hash != ''){
                 gBlock.setHash(hash);
@@ -46,9 +48,10 @@ class miner {
             }
         }
 
+        // save block
         this.storage.addBlock(gBlock);
 
-        // account balance update
+        // accounts balance update
         gBlock.getTransactions().forEach(tx => {
             
             let from = tx.getFrom();
@@ -56,13 +59,15 @@ class miner {
             let value = tx.getValue();
 
             if( from != ''){
-                this.storage.appendBalance(from,value);
+                this.storage.appendBalance(from,-value);
             }
             
             if( to != ''){
                 this.storage.appendBalance(to,value);
             }
         });
+
+        this.storage.clearTxPool();
 
         console.log(`New block created by hashing ${gBlock.getNonce()} times.`);
      

@@ -6,6 +6,7 @@ class block {
         this.hash = '';
         this.prevHash = '';
         this.nonce = 0;
+        this.difficultyBits = 0;
         this.transactions = [];
         this.timeStamp = 0;
     }
@@ -38,6 +39,14 @@ class block {
         this.nonce++;
     }
 
+    getDifficultyBits() {
+        return this.difficultyBits;
+    }
+
+    setDifficultyBits(bits) {
+        this.difficultyBits = bits;
+    }
+
     addTransaction(transaction) {
         this.transactions.push(transaction);
     }
@@ -60,7 +69,7 @@ class block {
 
     getContent() {
 
-        let contents = this.prevHash + this.nonce.toString();
+        let contents = this.prevHash + this.nonce.toString() + this.difficultyBits.toString();
 
         this.transactions.forEach(tx => {
             contents += tx.toString();
