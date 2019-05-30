@@ -409,4 +409,4 @@
 
 
 # api test screenshot
-![api_test](./api_+test_capture.png)
+![api_test_capture](./api_test_capture.png)
