@@ -407,3 +407,6 @@
                     }
                 }
 
+
+# api test screenshot
+![api-test](./api-test 캡쳐화면.png)
