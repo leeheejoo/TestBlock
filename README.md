@@ -65,7 +65,7 @@
 - chain : block chain을 control하기 위한 wrapper class로 저장소 정보를 포함하며 accont 생성, transaction transfer, generate block등의 기능을 수행함
 - consensus : pow 함의를 위한 기능 및 chain 검증기능을 포함함.
 - miner : block을 생성하는 기능을 포함함
-- storage : chain 정보 및 world state(accounts) 정보를 정정하는 저장소. 아직 file or DB로 저장하지 않고 memory로 저장.
+- storage : chain 정보 및 world state(accounts) 정보를 저장하는 저장소. 아직 file or DB로 저장하지 않고 memory로 저장.
 - transaction : tansaction 정보를 나타내며 from, to, value 정보를 포함한다.
 - utils : sha256, hash160, hash256 함수 포함
 - rpcs : 11종의 api 기능 포함 

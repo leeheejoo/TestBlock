@@ -4,7 +4,7 @@ const transaction = require('./transaction').transaction;
 
 /** 
 *  @class       저장소 class
-*  @classdesc   chain 정보 및 world state(accounts) 정보를 정정하는 저장소. 아직 file or DB로 저장하지 않고 memory로 저장. 
+*  @classdesc   chain 정보 및 world state(accounts) 정보를 저장하는 저장소. 아직 file or DB로 저장하지 않고 memory로 저장. 
 **/
 class storage {
 
