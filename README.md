@@ -50,11 +50,13 @@
         - generateBlock rpc 호출로 생성
         - block 보상(coinbase 보상) 기능 추가
     - block 검증 기능
-        - genensys block 부터 chain을 다시 생성하여 기존어 저장된 block hash값을 비교하여 검증
+        - genensys block 부터 chain을 다시 생성하여 기존에 저장된 block hash값을 비교하여 검증
     - consensus 알고리즘
         - pow 사용
     - rpc 기능 
         - json-rpc2, 보안기능 미적용
+    - 저장소는 file 및 db를 사용하지 않고 memory에만 올려 놓음
+        - 프로그램 재시작 하면 모든 블록이 지워짐
 
 # apis
     - 테스트 주소 : http://127.0.0.1:3000
@@ -154,6 +156,239 @@
                             {
                                 "balance": 0,
                                 "address": "16k26htS4Dr8JeTdxX8osrsYvwCFWEbkrC"
+                            }
+                        ]
+                    }
+                }
+
+    - getBalance
+        - 특정 address에 대한 balance를 조회함
+        - header
+            - Content-Type : application/json
+        - parameter
+            - address
+        - result 
+            - balance or error
+        - example
+            - request body
+                { 
+                    "jsonrpc": "2.0", 
+                    "method": "getBalance", 
+                    "params" : {"address":"1NBaNVXqcLTFNJ3vdVrdaWJ8eMjkAYixgz"},
+                    "id": "1"
+                }
+            - response body
+                {
+                    "jsonrpc": "2.0",
+                    "id": "1",
+                    "result": {
+                        "address": "1NBaNVXqcLTFNJ3vdVrdaWJ8eMjkAYixgz",
+                        "balance": 0
+                    }
+                }
+
+    - transfer
+        - 거래를 생성함
+        - header
+            - Content-Type : application/json
+        - parameter
+            - from : 보내는 account의 address
+            - to   : 받는 account의 address
+            - value: 보내는 coin amount 
+        - result 
+            - success or fail or error
+        - example
+            - request body
+                { 
+                    "jsonrpc": "2.0", 
+                    "method": "transfer", 
+                    "params" : {"from":"1NBaNVXqcLTFNJ3vdVrdaWJ8eMjkAYixgz", "to":"16k26htS4Dr8JeTdxX8osrsYvwCFWEbkrC", "value":10},
+                    "id": "1"
+                }
+            - response body
+                {
+                    "jsonrpc": "2.0",
+                    "id": "1",
+                    "result": "success"         // tx sign 기능 미구현으로 txid(hash)값 대신 success or fail 정보를 반환
+                }
+
+    - generateBlock
+        - 새로운 block을 생성함
+        - header
+            - Content-Type : application/json
+        - result 
+            - block hash or error
+        - example
+            - request body
+                { 
+                    "jsonrpc": "2.0", 
+                    "method": "generateBlock", 
+                    "id": "1"
+                }
+            - response body
+                {
+                    "jsonrpc": "2.0",
+                    "id": "1",
+                    "result": {
+                        "hash": "003c3330549c556b4e5c1c486c9d4ecc981fbf8f4c1f7af208ac1c74624bb757"
+                    }
+                }
+
+    - getBlockHeight
+        - block height를 조회함
+        - header
+            - Content-Type : application/json
+        - result 
+            - block height or error
+        - example
+            - request body
+                { 
+                    "jsonrpc": "2.0", 
+                    "method": "getBlockHeight", 
+                    "id": "1"
+                }
+            - response body
+                {
+                    "jsonrpc": "2.0",
+                    "id": "1",
+                    "result": {
+                        "height": 2
+                    }
+                }
+
+    - getBlock
+        - 특정 block 정보를 조회함
+        - header
+            - Content-Type : application/json
+        - parameter
+            - block hash
+        - result 
+            - block or error
+        - example
+            - request body
+                { 
+                    "jsonrpc": "2.0", 
+                    "method": "getBlock", 
+                    "params" : {"hash":"003c3330549c556b4e5c1c486c9d4ecc981fbf8f4c1f7af208ac1c74624bb757"},
+                    "id": "1"
+                }
+            - response body
+                {
+                    "jsonrpc": "2.0",
+                    "id": "1",
+                    "result": {
+                        "block": {
+                            "hash": "003c3330549c556b4e5c1c486c9d4ecc981fbf8f4c1f7af208ac1c74624bb757",
+                            "prevHash": "002bcbff38908dcfdce76004b560c86937e881563f4f3541fc89a8b94b326d30",
+                            "nonce": 3647,
+                            "difficultyBits": 10,
+                            "transactions": [
+                                {
+                                    "from": "",                                         // coinbase
+                                    "to": "1NBaNVXqcLTFNJ3vdVrdaWJ8eMjkAYixgz",
+                                    "value": 100
+                                },
+                                {
+                                    "from": "1NBaNVXqcLTFNJ3vdVrdaWJ8eMjkAYixgz",
+                                    "to": "16k26htS4Dr8JeTdxX8osrsYvwCFWEbkrC",
+                                    "value": 10
+                                }
+                            ],
+                            "timeStamp": 1559192836454
+                        }
+                    }
+                }
+
+
+    - getBlocks
+        - 복수의 block 정보를 조회함, start는 1부터 시작, count는 1보다 커야함
+        - header
+            - Content-Type : application/json
+        - parameter
+            - start : 조회할 첫번째 block의 height
+            - count : 조회할 block의 수
+        - result 
+            - block list or error
+        - example
+            - request body
+                { 
+                    "jsonrpc": "2.0", 
+                    "method": "getBlocks", 
+                    "params" : {"start":1, "count":100},
+                    "id": "1"
+                }
+            - response body
+                {
+                    "jsonrpc": "2.0",
+                    "id": "1",
+                    "result": {
+                        "blocks": [
+                            {
+                                "hash": "002bcbff38908dcfdce76004b560c86937e881563f4f3541fc89a8b94b326d30",
+                                "prevHash": "",                                                                 // genesys block
+                                "nonce": 815,
+                                "difficultyBits": 10,
+                                "transactions": [
+                                    {
+                                        "from": "",
+                                        "to": "1NBaNVXqcLTFNJ3vdVrdaWJ8eMjkAYixgz",
+                                        "value": 100
+                                    }
+                                ],
+                                "timeStamp": 1559192613531
+                            },
+                            {
+                                "hash": "003c3330549c556b4e5c1c486c9d4ecc981fbf8f4c1f7af208ac1c74624bb757",
+                                "prevHash": "002bcbff38908dcfdce76004b560c86937e881563f4f3541fc89a8b94b326d30",
+                                "nonce": 3647,
+                                "difficultyBits": 10,
+                                "transactions": [
+                                    {
+                                        "from": "",
+                                        "to": "1NBaNVXqcLTFNJ3vdVrdaWJ8eMjkAYixgz",
+                                        "value": 100
+                                    },
+                                    {
+                                        "from": "1NBaNVXqcLTFNJ3vdVrdaWJ8eMjkAYixgz",
+                                        "to": "16k26htS4Dr8JeTdxX8osrsYvwCFWEbkrC",
+                                        "value": 10
+                                    }
+                                ],
+                                "timeStamp": 1559192836454
+                            }
+                        ]
+                    }
+                }
+
+     - verifyChain
+        - chain에 포함된 모든 block을 검증함
+        - header
+            - Content-Type : application/json
+        - result 
+            - 검증 결과 or error
+        - example
+            - request body
+                { 
+                    "jsonrpc": "2.0", 
+                    "method": "verifyChain", 
+                    "id": "1"
+                }
+            - response body
+                {
+                    "jsonrpc": "2.0",
+                    "id": "1",
+                    "result": {
+                        "result": "success",
+                        "details": [
+                            {
+                                "height": 1,
+                                "blockHash": "002bcbff38908dcfdce76004b560c86937e881563f4f3541fc89a8b94b326d30",
+                                "verifyHash": "002bcbff38908dcfdce76004b560c86937e881563f4f3541fc89a8b94b326d30"
+                            },
+                            {
+                                "height": 2,
+                                "blockHash": "003c3330549c556b4e5c1c486c9d4ecc981fbf8f4c1f7af208ac1c74624bb757",
+                                "verifyHash": "003c3330549c556b4e5c1c486c9d4ecc981fbf8f4c1f7af208ac1c74624bb757"
                             }
                         ]
                     }
