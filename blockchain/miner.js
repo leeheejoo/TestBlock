@@ -4,14 +4,28 @@ const storage = require('./storage').storage;
 const config = require('../config/config');
 const consensus = require('./consensus').consensus;
 
+/** 
+*  @class       miner class
+*  @classdesc   block을 생성하는 기능을 포함함
+**/
 class miner {
 
+    /**
+    * @method   miner.constructor  
+    * @param {string} coinbase  blcok 생성시 보상을 받을 coinbase address
+    * @param {object} storage  block chain 저장소
+    * @description  생성자
+    **/ 
     constructor(coinbase, storage) {
         this.coinbase = coinbase;
         this.storage = storage;
         this.consensus = new consensus();
     }
 
+    /**
+    * @method   miner.generateBlock  
+    * @description  새로운 block을 생성하는 함수
+    **/ 
     generateBlock(){
 
         let gBlock = new block();

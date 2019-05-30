@@ -1,0 +1,97 @@
+// getCoinbaseAddress
+
+{ 
+  "jsonrpc": "2.0", 
+  "method": "getCoinbaseAddress", 
+  "id": "1"
+}
+
+
+// setCoinbaseAddress
+
+{ 
+  "jsonrpc": "2.0", 
+  "method": "setCoinbaseAddress", 
+  "params" : {"address":"1DhKz8eUo3jgxfKTNwXyvzy7BUifPijppy"},
+  "id": "1"
+}
+
+
+// getNewAddress
+
+{ 
+  "jsonrpc": "2.0", 
+  "method": "getNewAddress", 
+  "id": "1"
+}
+
+
+// getAccounts
+
+{ 
+  "jsonrpc": "2.0", 
+  "method": "getAccounts", 
+  "id": "1"
+}
+
+// getBalance
+
+{ 
+  "jsonrpc": "2.0", 
+  "method": "getBalance", 
+  "params" : {"address":"13Xwt7n7G8iBwVgKJKApMK1L5wGqFXZLe2"},
+  "id": "1"
+}
+
+// transfer
+{ 
+  "jsonrpc": "2.0", 
+  "method": "transfer", 
+  "params" : {"from":"1FVuSQohGMBau5R4pahMmGyR9PzkKk6bqN", "to":"12brWkfGYWiDaBCoFDJpsF8ASNKz6ryZRG", "value":10},
+  "id": "1"
+}
+
+
+// generateBlock
+
+{ 
+  "jsonrpc": "2.0", 
+  "method": "generateBlock", 
+  "id": "1"
+}
+
+
+// getBlockHeight
+
+{ 
+  "jsonrpc": "2.0", 
+  "method": "getBlockHeight", 
+  "id": "1"
+}
+
+// getBlock
+
+{ 
+  "jsonrpc": "2.0", 
+  "method": "getBlock", 
+  "params" : {"hash":"001755e3684f6356f76063794f18e9d59cb534334bdd4470d495bc4cb0c290f2"},
+  "id": "1"
+}
+
+
+// getBlocks
+
+{ 
+  "jsonrpc": "2.0", 
+  "method": "getBlocks", 
+  "params" : {"start":1, "count":100},
+  "id": "1"
+}
+
+// verifyChain
+
+{ 
+  "jsonrpc": "2.0", 
+  "method": "verifyChain", 
+  "id": "1"
+}
