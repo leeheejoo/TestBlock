@@ -75,7 +75,7 @@ class chain {
   /**
   * @method   chain.transfer
   * @description  transaction을 생성하여 coin의 가치를 이동시키는 함수
-  * @param {string} from  보낸는 account의 address
+  * @param {string} from  보내는 account의 address
   * @param {string} to    받는 account의 address
   * @param {Number} value 보내는 coin amount 
   * @return 성공/실패, 보통 block chain들은 transaction이 생성되면 txid(transaction hash)를 반환한다. 아직 transaction sign기능을 구현하지 않아 성공/실패 결과만 전달함.

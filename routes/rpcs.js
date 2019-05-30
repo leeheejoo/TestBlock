@@ -3,6 +3,11 @@ const router = express.Router();
 
 router.post('/', function(req, res, next) {
 
+  /**
+  * @method   getCoinbaseAddress   
+  * @description  (json rpc2) coinbase address를 조회함
+  * @return coinbase address or error
+  **/
   res.rpc('getCoinbaseAddress', function(params, respond){
 
     try{
@@ -21,6 +26,12 @@ router.post('/', function(req, res, next) {
 
   });
 
+  /**
+  * @method   setCoinbaseAddress   
+  * @description  (json rpc2) coinbase address를 설정함
+  * @param {string} address
+  * @return success or fail or error
+  **/
   res.rpc('setCoinbaseAddress', function(params, respond){
 
     try{
@@ -39,6 +50,11 @@ router.post('/', function(req, res, next) {
 
   });
 
+  /**
+  * @method   getNewAddress   
+  * @description  (json rpc2) 새로운 account(address)를 생성함
+  * @return address or error
+  **/
   res.rpc('getNewAddress', function(params, respond){
 
     try{
@@ -57,6 +73,12 @@ router.post('/', function(req, res, next) {
 
   });
 
+  /**
+  * @method   getBalance   
+  * @description  (json rpc2) 특정 address에 대한 balance를 조회함
+  * @param {string} address
+  * @return balance or error
+  **/
   res.rpc('getBalance', function(params, respond){
 
     try{
@@ -78,6 +100,11 @@ router.post('/', function(req, res, next) {
 
   });
 
+  /**
+  * @method   getAccounts   
+  * @description  (json rpc2) 모든 account 정보를 조회함
+  * @return address list or error
+  **/
   res.rpc('getAccounts', function(params, respond){
 
     try{
@@ -97,6 +124,14 @@ router.post('/', function(req, res, next) {
 
   });
 
+  /**
+  * @method   transfer   
+  * @description  (json rpc2) 거래를 생성함
+  * @param {string} from  보내는 account의 address
+  * @param {string} to    받는 account의 address
+  * @param {Number} value 보내는 coin amount 
+  * @return success or fail or error
+  **/
   res.rpc('transfer', function(params, respond){
     try{
 
@@ -129,6 +164,12 @@ router.post('/', function(req, res, next) {
     }
   });
 
+  /**
+  * @method   getBlock   
+  * @description  (json rpc2) 특정 block 정보를 조회함
+  * @param {string} hash
+  * @return block or error
+  **/
   res.rpc('getBlock', function(params, respond){
     try{
       let hash = params.hash;
@@ -147,7 +188,13 @@ router.post('/', function(req, res, next) {
     }
   });
 
-  // start는 1부터 시작
+  /**
+  * @method   getBlocks   
+  * @description  (json rpc2) 복수의 block 정보를 조회함, start는 1부터 시작, count는 1보다 커야함
+  * @param {Number} start 조회할 첫번째 block의 height
+  * @param {Number} count 조회할 block의 수
+  * @return block list or error
+  **/
   res.rpc('getBlocks', function(params, respond){
     try{
 
@@ -175,6 +222,11 @@ router.post('/', function(req, res, next) {
     }
   });
 
+  /**
+  * @method   getBlockHeight   
+  * @description  (json rpc2) block height를 조회함
+  * @return block height or error
+  **/
   res.rpc('getBlockHeight', function(params, respond){
     try{
       let height = chain.getBlockHeight();
@@ -192,7 +244,11 @@ router.post('/', function(req, res, next) {
     }
   });
 
-
+  /**
+  * @method   generateBlock   
+  * @description  (json rpc2) 새로운 block을 생성함
+  * @return block hash or error
+  **/
   res.rpc('generateBlock', function(params, respond){
     try{
       let hash = chain.generateBlock();
@@ -210,6 +266,11 @@ router.post('/', function(req, res, next) {
     }
   });
 
+  /**
+  * @method   verifyChain   
+  * @description  (json rpc2) chain에 포함된 모든 block을 검증함
+  * @return 검증 결과 or error
+  **/
   res.rpc('verifyChain',  function(params, respond){
 
     try{
