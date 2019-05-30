@@ -414,7 +414,7 @@
 # example
 - chain verify 확인 절차
     1. generateBlock api 호출로 genesys block 생성 ( coinbase balance 100 생성)
-    2. getNewAddress api 호출로 acoount 생성
+    2. getNewAddress api 호출로 account 생성
     3. transfer api 호출,
         - from : coinbase, to : getNewAddress로 생성한 주소, value : 10
         - coinbase 주소는 getCoinbaseAddress api 호출로 확인 가능
@@ -424,5 +424,5 @@
         - coinbase balance는 190, to address balance는 10
         - getAccount api를 호출하여 확인 가능
     6. 1~5번 과정과 같이 새로운 주소 생성, 거래, 블록 생성을 여러번 함
-    7. verify chain api를 호출하여 genesys block 부터 현재 block 까지 hash 값을 검증
+    7. verifyChain api를 호출하여 genesys block 부터 현재 block 까지 hash 값을 검증
         - 검증 결과값이 success면 성공, fail이면 실패
